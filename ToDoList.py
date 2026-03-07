@@ -3,7 +3,7 @@
 #list that will have tasks added 
 
 title = "Welcome"
-print(title.center(20, "="))
+print(title.center(60, "="))
 
 #list to hold tasks
 tasks = []
@@ -23,7 +23,7 @@ exit = True
 #Functions for each section
 def add_task():
     task = input("Enter a task: ")
-    #check if its an integer beimg entered
+    #check if its an integer being entered
     if task.isdigit():
         print("Please enter words!!")
         return
@@ -31,6 +31,7 @@ def add_task():
     elif task == "":
         print("Space cannot be empty!!")
         return
+    print("Task added succesfully!")
     tasks.append(task)
     
 
@@ -72,12 +73,16 @@ def view_completed():
 def exitout():
     global exit
     print("Closing ToDo list goodbye !!")
+    goodbye = ""
+    print(goodbye.center(60, "="))
     exit = False
     
 
 #Code holding all functions
 while exit:
     try:
+        heading =""
+        print(heading.center(60, "="))
         choice = int(input("Hey welcome to your ToDo list what would you like to do?\n1.Add Task\n2.View Tasks\n3.Remove tasks\n4.View outsanding tasks\n5.View completed tasks\n6.Exit\nInput here: "))
         if choice == 1:
             add_task()
