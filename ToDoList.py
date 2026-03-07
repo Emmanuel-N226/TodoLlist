@@ -27,26 +27,37 @@ def add_task():
     if task.isdigit():
         print("Please enter words!!")
         return
+    #new improvement
+    elif task == "":
+        print("Space cannot be empty!!")
+        return
     tasks.append(task)
     
 
 def view_task():
+    global tasks
     if len(tasks) == 0:
         print("No task here!!")
     else:
-        print(f"Here are your tasks\n{tasks}")
+        #new feature enumerate 
+        print("Here are your tasks!!!")
+        for i , tasks in enumerate(tasks, start=1):
+            print(f"{i}. {tasks}")
+
     
 
 def remove_tasks():
+    global tasks
     if len(tasks) == 0:
         print("No tasks to remove")
     else:
-        task_remove =input(f"Enter a task your done with from the list\n{tasks}: ")
-        #remove uses value
-        #delete uses index 
-        #added task come here 
+        for i , task in enumerate(tasks, start=1):
+            print(f"{i}. {tasks}")
+
+        task_remove =int(input(f"Enter number of the the task your done with from the list: ")) 
         done.append(task_remove)
-        tasks.remove(task_remove)
+        #new improvement
+        tasks.pop(task_remove-1)
         print(f"Your task {task_remove} has been completed and added to your done catalogue!!")
     
 
@@ -64,7 +75,7 @@ def exitout():
     exit = False
     
 
-#Daddy code holding all functions
+#Code holding all functions
 while exit:
     try:
         choice = int(input("Hey welcome to your ToDo list what would you like to do?\n1.Add Task\n2.View Tasks\n3.Remove tasks\n4.View outsanding tasks\n5.View completed tasks\n6.Exit\nInput here: "))
@@ -82,6 +93,7 @@ while exit:
             exitout()
         else:
             print("Please enter a valid option!!")
+    #new improvement
     except ValueError:
         print("Please enter a valid option!!")
 
