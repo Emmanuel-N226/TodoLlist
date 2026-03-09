@@ -34,9 +34,6 @@ def add_task():
         #adding priority
         priority = input("Enter priority\nHigh, Medium , Low: ").capitalize()
         
-        tasks[task] = {"due" : due_date,
-                    "priority" : priority}  #combining the key and value pairs
-        
 
         #Check if its an integer being entered
         if task.isdigit() or priority.isdigit():
@@ -49,6 +46,9 @@ def add_task():
         elif priority != "High" and priority != "Medium" and priority != "Low":
             print("Enter a valid priorities option!")
             return
+        
+        tasks[task] = {"due" : due_date,
+                    "priority" : priority}#combining the key and value pairs
         
         finished = input("Are you done entering tasks? Y/N: ").capitalize()
         if finished == "Y":
@@ -138,12 +138,17 @@ def save_file(tasks):
         for task,info in tasks.items():
             f.write(f"{task},{info['due']},{info['priority']}"+ "\n")
 
+
+#need to cook more here:
 def load_file():
     try:
         with open("Todo.txt", "r") as f:
             for line in f:
-                task = line.strip()
-                tasks[task] = {}
+                task, due_date, priority = line.strip().split(",")
+                tasks[task] = {
+                    "due": due_date,
+                    "priority": priority
+                }
     except FileNotFoundError:
         pass
 
@@ -154,8 +159,9 @@ def exitout():
     goodbye = ""
     print(goodbye.center(60, "="))
     exit = False
-    
 
+#loading my previous notes    
+load_file()
 #Code holding all functions
 while exit:
     try:
@@ -173,7 +179,7 @@ while exit:
         elif choice == 5:
             view_completed()
         elif choice == 6:
-            save_file()
+            save_file(tasks)
             exitout()
         else:
             print("Please enter a valid option!!")
