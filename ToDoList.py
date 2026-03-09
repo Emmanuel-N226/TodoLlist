@@ -25,64 +25,101 @@ exit = True
 
         
 def add_task():
-    task = input("Enter a task: ")
-    #adding due date
-    due_date = input("Enter task due date: ")
-    #adding priority
-    priority = input("Enter priority\nHigh, Meduim , Low: ").capitalize()
-    
-    tasks[task] = {"due" : due_date,
-                   "priority" : priority}  #combining the key and value pairs
-    
+    adding_task = True
+    while adding_task:
+        print()
+        task = input("Enter a task: ")
+        #adding due date
+        due_date = input("Enter task due date: ")
+        #adding priority
+        priority = input("Enter priority\nHigh, Meduim , Low: ").capitalize()
+        
+        tasks[task] = {"due" : due_date,
+                    "priority" : priority}  #combining the key and value pairs
+        
 
-    #Check if its an integer being entered
-    if task.isdigit() or priority.isdigit():
-        print("Please enter words!!")
-        return
-    #New improvement
-    elif task == "" or due_date == "" or priority == "":
-        print("Space cannot be empty!!")
-        return
-    elif priority != "High" and priority != "Meduim" and priority != "Low":
-        print("Enter a valid p1riorities option!")
-        return
+        #Check if its an integer being entered
+        if task.isdigit() or priority.isdigit():
+            print("Please enter words!!")
+            return
+        #New improvement
+        elif task == "" or due_date == "" or priority == "":
+            print("Space cannot be empty!!")
+            return
+        elif priority != "High" and priority != "Meduim" and priority != "Low":
+            print("Enter a valid priorities option!")
+            return
+        
+        finished = input("Are you done entering tasks? Y/N: ").capitalize()
+        if finished == "Y":
+            adding_task = False
+            break
+        elif finished == "N":
+            print("Task succesfully added!")
+            continue
+        elif finished == "":
+            print("Space can not be empty!")
+            return
+        else:
+            print("Enter a valid option!")
+            return
     
-
-    print("Task succesfully! added")
+    print("Task succesfully added!")
     
     
 
 def view_task():
     global tasks
     if len(tasks) == 0:
+        print()
         print("No task here!")
     else:
         #new feature enumerate 
+        print()
         print("Here are your tasks!")
         for task, info in tasks.items():
             #cleaner format on task viewing
+            print()
             print(f"Task: {task}")
             print(f"Due: {info['due']}")
             print(f"Priority: {info['priority']}")
             print()
-            print(f"You have {len(tasks)} tasks remaining.")
+        
+        print(f"You have {len(tasks)} tasks remaining.")
 
     
 
 def remove_tasks():
     global tasks
     if len(tasks) == 0:
+        print()
         print("No tasks to remove.")
     else:
-        for i , (task , due_date) in enumerate(tasks.items(), start=1):
-            print(f"{i}. {tasks}-{due_date}")
+        removing_tasks = True
+        while removing_tasks:
+            print("Here are tasks you can remove:")
+            for i , (task , info) in enumerate(tasks.items(), start=1):
+                print()
+                print(f"{i}.Task: {task}")
+                print(f"Due: {info['due']}")
+                print(f"Priority: {info['priority']}")
+                print()
 
-        task_remove =int(input(f"Enter number of the task your done with from the list: ")) 
-        removed = list(tasks.keys())[task_remove-1]
-        done.append(task_remove)
-        #new improvement
-        del tasks[removed]
-        print(f"Your task {task_remove} has been completed and added to your done catalogue!")
+            task_remove =int(input(f"Enter number of the task your done with from the list: ")) 
+            removed = list(tasks.keys())[task_remove-1]
+            done.append(removed)
+            #new improvement
+            del tasks[removed]
+            reremove= input("Do you want to remove more tasks? Y/N: ").capitalize()
+            if reremove == "Y":
+                print(f"Your task {removed} has been completed and added to your done catalogue!")
+                continue
+            elif reremove == "N":
+                break
+            else:
+                print("enter a vald option")
+                continue
+        print(f"Your task {removed} has been completed and added to your done catalogue!")
         print(f"You have {len(tasks)} tasks remaining.")
     
 
@@ -91,12 +128,14 @@ def view_outstanding():
     
 
 def view_completed():
+    print()
     print(f"here are you completed tasks:\n{done}")
     print(f"You have {len(tasks)} tasks remaining.")
     
 
 def exitout():
     global exit
+    print()
     print("Closing ToDo list goodbye!")
     goodbye = ""
     print(goodbye.center(60, "="))
