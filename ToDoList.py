@@ -32,7 +32,7 @@ def add_task():
         #adding due date
         due_date = input("Enter task due date: ")
         #adding priority
-        priority = input("Enter priority\nHigh, Meduim , Low: ").capitalize()
+        priority = input("Enter priority\nHigh, Medium , Low: ").capitalize()
         
         tasks[task] = {"due" : due_date,
                     "priority" : priority}  #combining the key and value pairs
@@ -46,7 +46,7 @@ def add_task():
         elif task == "" or due_date == "" or priority == "":
             print("Space cannot be empty!!")
             return
-        elif priority != "High" and priority != "Meduim" and priority != "Low":
+        elif priority != "High" and priority != "Medium" and priority != "Low":
             print("Enter a valid priorities option!")
             return
         
@@ -133,6 +133,20 @@ def view_completed():
     print(f"You have {len(tasks)} tasks remaining.")
     
 
+def save_file(tasks):
+    with open("Todo.txt", "w") as f:
+        for task,info in tasks.items():
+            f.write(f"{task},{info['due']},{info['priority']}"+ "\n")
+
+def load_file():
+    try:
+        with open("Todo.txt", "r") as f:
+            for line in f:
+                task = line.strip()
+                tasks[task] = {}
+    except FileNotFoundError:
+        pass
+
 def exitout():
     global exit
     print()
@@ -159,6 +173,7 @@ while exit:
         elif choice == 5:
             view_completed()
         elif choice == 6:
+            save_file()
             exitout()
         else:
             print("Please enter a valid option!!")
