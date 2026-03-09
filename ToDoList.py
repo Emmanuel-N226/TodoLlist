@@ -6,7 +6,7 @@ title = "Welcome"
 print(title.center(60, "="))
 
 #list to hold tasks
-tasks = []
+tasks = {}
 #list to hold completed tasks
 done = []
 #Exit condition
@@ -23,6 +23,10 @@ exit = True
 #Functions for each section
 def add_task():
     task = input("Enter a task: ")
+    #adding due date
+    due_date = input("Enter task due date: ")
+    tasks[task] = due_date #combining the key and value pairs
+
     #check if its an integer being entered
     if task.isdigit():
         print("Please enter words!!")
@@ -32,7 +36,6 @@ def add_task():
         print("Space cannot be empty!!")
         return
     print("Task succesfully! added")
-    tasks.append(task)
     
 
 def view_task():
@@ -53,13 +56,14 @@ def remove_tasks():
     if len(tasks) == 0:
         print("No tasks to remove.")
     else:
-        for i , task in enumerate(tasks, start=1):
-            print(f"{i}. {tasks}")
+        for i , (task , due_date) in enumerate(tasks.items(), start=1):
+            print(f"{i}. {tasks}-{due_date}")
 
         task_remove =int(input(f"Enter number of the task your done with from the list: ")) 
+        removed = list(tasks.keys())[task_remove-1]
         done.append(task_remove)
         #new improvement
-        tasks.pop(task_remove-1)
+        del tasks[removed]
         print(f"Your task {task_remove} has been completed and added to your done catalogue!")
         print(f"You have {len(tasks)} tasks remaining.")
     
@@ -105,8 +109,4 @@ while exit:
     except ValueError:
         print("Please enter a valid option!!")
 
-
-
-    
-
-1
+ 
