@@ -21,21 +21,35 @@ exit = True
 #6.exit
 
 #Functions for each section
+#priorities function
+
+        
 def add_task():
     task = input("Enter a task: ")
     #adding due date
     due_date = input("Enter task due date: ")
-    tasks[task] = due_date #combining the key and value pairs
+    #adding priority
+    priority = input("Enter priority\nHigh, Meduim , Low: ").capitalize()
+    
+    tasks[task] = {"due" : due_date,
+                   "priority" : priority}  #combining the key and value pairs
+    
 
-    #check if its an integer being entered
-    if task.isdigit():
+    #Check if its an integer being entered
+    if task.isdigit() or priority.isdigit():
         print("Please enter words!!")
         return
-    #new improvement
-    elif task == "":
+    #New improvement
+    elif task == "" or due_date == "" or priority == "":
         print("Space cannot be empty!!")
         return
+    elif priority != "High" and priority != "Meduim" and priority != "Low":
+        print("Enter a valid p1riorities option!")
+        return
+    
+
     print("Task succesfully! added")
+    
     
 
 def view_task():
@@ -45,8 +59,12 @@ def view_task():
     else:
         #new feature enumerate 
         print("Here are your tasks!")
-        for i , task in enumerate(tasks, start=1):
-            print(f"{i}. {tasks}")
+        for task, info in tasks.items():
+            #cleaner format on task viewing
+            print(f"Task: {task}")
+            print(f"Due: {info['due']}")
+            print(f"Priority: {info['priority']}")
+            print()
             print(f"You have {len(tasks)} tasks remaining.")
 
     
