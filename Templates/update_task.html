@@ -1,0 +1,20 @@
+<!--Calling the title-->
+{% extends 'base.html' %}
+
+{% block title %}Edit Task{% endblock %}
+
+{% block head %}    {% endblock %}
+
+{% block content %}
+    <div id="heading">
+        <h2>Edit Task</h2>
+    </div>
+    <div id="edit">
+        <form action="/edit/{{ task[0] }}" method="POST">
+            <input type="text" name="new_task" id="form4" value="{{task[1]}}">
+            <input type="text" name="new_priority" id="form4" value="{{task[2]}}">
+            <input type="text" name="new_due_date" id="form4" value="{{task[3]}}">
+            <button type="submit">Edit</button>
+        </form>
+    </div>    
+{% endblock %}
