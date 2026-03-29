@@ -1,0 +1,370 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:          #0e0f11;
+  --bg-card:     #16181c;
+  --bg-input:    #1e2026;
+  --bg-hover:    #22252c;
+  --border:      #2a2d35;
+  --border-focus:#4f46e5;
+
+  --text-primary:   #f0f0f2;
+  --text-secondary: #8b8fa8;
+  --text-muted:     #4e5265;
+
+  --accent:      #4f46e5;
+  --accent-glow: rgba(79, 70, 229, 0.18);
+  --accent-hover:#6056f5;
+
+  --high:        #ef4444;
+  --high-bg:     rgba(239, 68, 68, 0.10);
+  --medium:      #f59e0b;
+  --medium-bg:   rgba(245, 158, 11, 0.10);
+  --low:         #22c55e;
+  --low-bg:      rgba(34, 197, 94, 0.10);
+
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── LAYOUT ─────────────────────────────────── */
+
+#content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
+}
+
+#footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 13px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+}
+
+/* ── HEADINGS ────────────────────────────────── */
+
+#heading {
+  margin-bottom: 2.5rem;
+}
+
+#heading h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #f0f0f2 30%, #8b8fa8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#heading h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+}
+
+/* ── ADD TASK CARD ───────────────────────────── */
+
+#adduser {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#adduser::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+#adduser form {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 10px;
+  align-items: end;
+}
+
+/* ── EDIT CARD ───────────────────────────────── */
+
+#edit {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#edit::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+#edit form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── INPUTS ──────────────────────────────────── */
+
+input[type="text"],
+input[type="date"],
+select {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 0.9rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input[type="text"]::placeholder {
+  color: var(--text-muted);
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+  cursor: pointer;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b8fa8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+  cursor: pointer;
+}
+
+select option {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+/* ── BUTTONS ─────────────────────────────────── */
+
+button[type="submit"] {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.65rem 1.25rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 0 0 0 var(--accent-glow);
+}
+
+button[type="submit"]:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+button[type="submit"]:active {
+  transform: scale(0.97);
+}
+
+/* ── TABLE SECTION ───────────────────────────── */
+
+#usertable {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+thead tr {
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0 1rem 0.9rem;
+  text-align: left;
+}
+
+th:first-child { padding-left: 0; }
+
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+tbody tr:last-child { border-bottom: none; }
+
+tbody tr:hover { background: var(--bg-hover); }
+
+td {
+  padding: 0.95rem 1rem;
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+td:first-child { padding-left: 0; }
+
+/* ── PRIORITY BADGES ─────────────────────────── */
+
+td:nth-child(2) {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+/* Wrap the priority text in a span via the badge approach */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badge-high   { background: var(--high-bg);   color: var(--high);   }
+.badge-medium { background: var(--medium-bg); color: var(--medium); }
+.badge-low    { background: var(--low-bg);    color: var(--low);    }
+
+/* ── ACTION LINKS ────────────────────────────── */
+
+td a {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-display);
+  text-decoration: none;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  margin-right: 6px;
+}
+
+td a:hover {
+  color: var(--text-primary);
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+td a.delete-link {
+  color: var(--high);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+td a.delete-link:hover {
+  background: var(--high-bg);
+  border-color: var(--high);
+}
+
+/* ── RESPONSIVE ──────────────────────────────── */
+
+@media (max-width: 640px) {
+  #adduser form {
+    grid-template-columns: 1fr;
+  }
+
+  #content {
+    padding: 2rem 1rem 5rem;
+  }
+
+  th, td {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+/* ── FADE-IN ANIMATION ───────────────────────── */
+
+#heading, #adduser, #usertable, #edit {
+  animation: fadeUp 0.4s ease both;
+}
+
+#adduser  { animation-delay: 0.05s; }
+#usertable { animation-delay: 0.10s; }
+#edit     { animation-delay: 0.05s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}

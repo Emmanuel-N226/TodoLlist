@@ -1,0 +1,60 @@
+<!--Calling the title-->
+{% extends 'base.html' %}
+
+<!--Inherting title from parent-->
+{% block title %}Home Page{% endblock %}
+
+<!--Inherting header from parent-->
+{% block head %}
+    
+{% endblock %}
+
+<!--Inherting body/content from parent-->
+{% block content %}
+    <!--Heading-->
+    <div id="heading">
+        <h1>Get To Work!</h1>
+    </div>
+
+    <!--TABLE-->
+    <div id="adduser">
+        <h2>Add User</h2>
+        <form action="/add_task" method="POST">
+            <input type="text" name="task_text" id="form1" required>
+            <!--drop down priority selection-->
+            <select name="priority_text" id="form2" required>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+
+            <input  type="date" name="due_date_text" id="form3" required>
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
+
+    <div id="usertable">
+        <h2>Your Tasks</h2>
+        <table>
+            <tr>
+                <th>Tasks</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>Actions</th>
+            </tr>
+            <!--for loop to print out the table data for each task in tasks-->
+            {% for task in tasks %}
+            <tr>
+                <td>{{task[1]}}</td>
+                <td>{{task[2]}}</td>
+                <td>{{task[3]}}</td>
+                <td>
+                    <a href="{{ url_for('edit_task_route', id=task[0]) }}">Edit</a>
+                    <br />
+                    <a href="{{ url_for('delete_user_route', id=task[0]) }}" class="delete-link">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
