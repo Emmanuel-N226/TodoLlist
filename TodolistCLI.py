@@ -15,7 +15,7 @@ def create_table():
             id INT PRIMARY KEY,    
             task TEXT NOT NULL,
             priority TEXT NOT NULL,
-            due INT NOT NULL 
+            due TeXT NOT NULL 
             )""")
     print(">> code ran successfully")
     conn.commit()
@@ -24,13 +24,12 @@ def create_table():
 
 
 #Add items
-def add_task(id, task,priority,due):
+def add_task( task,priority,due):
     conn = connect_db()
     c = conn.cursor()
 
-    c.execute("INSERT INTO tasks VALUES(?,?,?,?)",(id,task,priority,due))
+    c.execute("INSERT INTO tasks VALUES(?,?,?)",(task,priority,due))
     print(">> entry entered successfully")
-
     conn.commit()
     conn.close()
 
@@ -38,13 +37,13 @@ def add_task(id, task,priority,due):
 def view_tasks():
     conn = connect_db()
     c = conn.cursor()
-
     c.execute("SELECT rowid, * FROM tasks")
     tasks = c.fetchall()
 
     for task in tasks:
         print(task)
     conn.close()
+    return tasks
 
 #view by id
 def get_task_by_id(id):
@@ -53,14 +52,15 @@ def get_task_by_id(id):
     c = conn.execute(
         "SELECT * FROM tasks WHERE id = ?", (id,)
     )
-    task = c.fetchone
+    task = c.fetchone()
     conn.close()
+    return task
 
 #Update task
 def edit_task(id, new_task,new_priority,new_due_date):
     conn = connect_db()
     c = conn.cursor()
-    c.execute("UPDATE tasks SET task = ?, priority = ? , due = ? WHERE rowid = ?",(id, new_task, new_due_date, new_priority))
+    c.execute("UPDATE tasks SET task = ?, priority = ? , due = ? WHERE rowid = ?",(new_task, new_priority, new_due_date, id))
     print(">> task updated")
     conn.commit()
     conn.close()

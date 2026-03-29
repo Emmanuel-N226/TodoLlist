@@ -27,7 +27,7 @@ def add_entry():
 #route to edit task
 @app.route('/edit_task/<int:id>', methods = ['POST', 'GET'])
 def edit_task(id,):
-    if request.method == ['POST']:
+    if request.method == 'POST':
         task = request.form['new_task']
         priority = request.form['new_priority']
         due = request.form['new_due_date']
@@ -37,9 +37,9 @@ def edit_task(id,):
     #Show task to edit    
     task = TodolistCLI.get_task_by_id(id)
     #send to update page so they can update 
-    return render_template('update_html', task=task)
+    return render_template('update_task.html', task=task)
 
-@app.route('/delete_task',methods=['GET'])
+@app.route('/delete_task/<int:id>',methods=['GET'])
 def delete_task(id):
     TodolistCLI.delete_task(id)
     return redirect(url_for('index'))
