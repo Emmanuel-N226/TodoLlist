@@ -1,11 +1,9 @@
-# Git-Gud
+## Versions
 
-A Python learning repository where I practice fundamentals and track progress with Git.
+### v1.0 - Basic CLI
+- In-memory task storage
+- Simple CRUD
 
-## Files
-- `todolist.py` – simple CLI to-do list
-- `booleans.py` – boolean logic practice
-- `forloops.py` – loop examples
-
-## Author
-Emmanuel Makhuba.
+### v2.0 - Database CLI
+- SQLite persistent storage
+- Refactored code into modules
