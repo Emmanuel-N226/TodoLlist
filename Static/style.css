@@ -83,6 +83,7 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-align: center;
 }
 
 #heading h2 {
@@ -101,6 +102,7 @@ h2 {
   text-transform: uppercase;
   color: var(--text-secondary);
   margin-bottom: 1.25rem;
+  text-align: center;
 }
 
 /* ── ADD TASK CARD ───────────────────────────── */
@@ -124,10 +126,31 @@ h2 {
 }
 
 #adduser form {
-  display: grid;
-  grid-template-columns: 1fr auto auto auto;
-  gap: 10px;
-  align-items: end;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+#adduser .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#adduser form input,
+#adduser form select {
+  width: 100%;
+}
+
+#adduser form button[type="submit"] {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 14px;
+}
+
+#adduser form label {
+  font-size: 13px;
+  color: var(--text-secondary);
 }
 
 /* ── EDIT CARD ───────────────────────────────── */
@@ -152,7 +175,34 @@ h2 {
 #edit form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 32px;        /* space between each group */
+}
+
+#edit .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;         /* label tight to its input */
+}
+
+#edit form input,
+#edit form select {
+  width: 100%;
+}
+
+#edit form button[type="submit"] {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 14px;
+}
+
+#edit form label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+#edit form a {
+  text-align: center;
+  display: block;
 }
 
 /* ── INPUTS ──────────────────────────────────── */
@@ -219,6 +269,8 @@ button[type="submit"] {
   white-space: nowrap;
   transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
   box-shadow: 0 0 0 0 var(--accent-glow);
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 
 button[type="submit"]:hover {
@@ -310,31 +362,30 @@ td:nth-child(2) {
 td a {
   display: inline-block;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   font-family: var(--font-display);
   text-decoration: none;
-  padding: 4px 12px;
+  padding: 6px 16px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  transition: color 0.15s, border-color 0.15s, background 0.15s;
-  margin-right: 6px;
+  border: none;
+  color: #fff;
+  transition: background 0.2s, tranform 0.1s;
+  margin-bottom: 6px;
 }
 
 td a:hover {
-  color: var(--text-primary);
-  border-color: var(--accent);
-  background: var(--accent-glow);
+  background: var(--accent-hover);
+  transform: scale(0.98);
 }
 
 td a.delete-link {
-  color: var(--high);
-  border-color: rgba(239, 68, 68, 0.2);
+  background: var(--accent);   /* same colour as edit */
+  color: #fff;
+  border: none;
 }
 
 td a.delete-link:hover {
-  background: var(--high-bg);
-  border-color: var(--high);
+  background: var(--accent-hover);
 }
 
 /* ── RESPONSIVE ──────────────────────────────── */
@@ -367,4 +418,11 @@ td a.delete-link:hover {
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0);    }
+}
+
+label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    display: inline-block;
 }
