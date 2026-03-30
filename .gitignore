@@ -1,3 +1,4 @@
 dictionaries.py
 tryandexpect.py
 taskapp.db
+__pycache__/
