@@ -2,7 +2,9 @@ import sqlite3
 
 #connecting database function
 def connect_db():
-    return sqlite3.connect("todoapp.db")
+    conn = sqlite3.connect("taskapp.db")
+    conn.row_factory = sqlite3.Row
+    return conn
 
 #Functions
 
@@ -10,12 +12,11 @@ def connect_db():
 def create_table():
     conn = connect_db()
     c = conn.cursor()
-
     c.execute("""CREATE TABLE IF NOT EXISTS tasks(
-            id INT PRIMARY KEY,    
+            id INTEGER PRIMARY KEY AUTOINCREMENT,    
             task TEXT NOT NULL,
             priority TEXT NOT NULL,
-            due TeXT NOT NULL 
+            due TEXT NOT NULL 
             )""")
     print(">> code ran successfully")
     conn.commit()
@@ -28,7 +29,7 @@ def add_task( task,priority,due):
     conn = connect_db()
     c = conn.cursor()
 
-    c.execute("INSERT INTO tasks VALUES(?,?,?)",(task,priority,due))
+    c.execute("INSERT INTO tasks(task, priority, due) VALUES(?,?,?)",(task,priority,due))
     print(">> entry entered successfully")
     conn.commit()
     conn.close()
@@ -37,7 +38,7 @@ def add_task( task,priority,due):
 def view_tasks():
     conn = connect_db()
     c = conn.cursor()
-    c.execute("SELECT rowid, * FROM tasks")
+    c.execute("SELECT * FROM tasks")
     tasks = c.fetchall()
 
     for task in tasks:

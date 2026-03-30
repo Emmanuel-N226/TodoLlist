@@ -10,11 +10,16 @@
         <h2>Edit Task</h2>
     </div>
     <div id="edit">
-        <form action="/edit/{{ task[0] }}" method="POST">
-            <input type="text" name="new_task" id="form4" value="{{task[1]}}">
-            <input type="text" name="new_priority" id="form4" value="{{task[2]}}">
-            <input type="text" name="new_due_date" id="form4" value="{{task[3]}}">
+        <form action="/edit_task/{{ task['id'] }}" method="POST">
+            <input type="text" name="new_task" id="form4" value="{{task[task]}}">
+            <select name="new_priority">
+                <option value="High"   {% if task['priority'] == 'High'   %}selected{% endif %}>High</option>
+                <option value="Medium" {% if task['priority'] == 'Medium' %}selected{% endif %}>Medium</option>
+                <option value="Low"    {% if task['priority'] == 'Low'    %}selected{% endif %}>Low</option>
+            </select>
+            <input type="date" name="new_due_date" id="form4" value="{{task['due']}}">
             <button type="submit">Edit</button>
+            <a href="{{ url_for('index') }}">Cancel</a>
         </form>
     </div>    
 {% endblock %}

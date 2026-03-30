@@ -13,7 +13,7 @@ TodolistCLI.create_table()
 @app.route("/")
 def index():
     tasks = TodolistCLI.view_tasks()
-    return render_template('index.html',task=tasks)
+    return render_template('index.html',tasks=tasks)
 
 #route to add items
 @app.route('/add_task',methods=['POST'])
@@ -31,7 +31,7 @@ def edit_task(id,):
         task = request.form['new_task']
         priority = request.form['new_priority']
         due = request.form['new_due_date']
-        TodolistCLI.edit_task(task, priority, due)
+        TodolistCLI.edit_task(id,task, priority, due)
         return redirect(url_for('index'))
 
     #Show task to edit    
