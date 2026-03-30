@@ -2,3 +2,5 @@ dictionaries.py
 tryandexpect.py
 taskapp.db
 __pycache__/
+.vscode/
+venv/
